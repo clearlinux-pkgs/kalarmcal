@@ -5,20 +5,19 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kalarmcal
-Version  : 18.08.0
-Release  : 2
-URL      : https://download.kde.org/stable/applications/18.08.0/src/kalarmcal-18.08.0.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.08.0/src/kalarmcal-18.08.0.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.08.0/src/kalarmcal-18.08.0.tar.xz.sig
-Summary  : No detailed summary available
+Version  : 18.12.2
+Release  : 3
+URL      : https://download.kde.org/stable/applications/18.12.2/src/kalarmcal-18.12.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.2/src/kalarmcal-18.12.2.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.2/src/kalarmcal-18.12.2.tar.xz.sig
+Summary  : The KAlarm client library
 Group    : Development/Tools
 License  : LGPL-2.1
-Requires: kalarmcal-lib
-Requires: kalarmcal-data
-Requires: kalarmcal-license
-Requires: kalarmcal-locales
+Requires: kalarmcal-data = %{version}-%{release}
+Requires: kalarmcal-lib = %{version}-%{release}
+Requires: kalarmcal-license = %{version}-%{release}
+Requires: kalarmcal-locales = %{version}-%{release}
 BuildRequires : akonadi-dev
-BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : kcalcore-dev
@@ -41,9 +40,9 @@ data components for the kalarmcal package.
 %package dev
 Summary: dev components for the kalarmcal package.
 Group: Development
-Requires: kalarmcal-lib
-Requires: kalarmcal-data
-Provides: kalarmcal-devel
+Requires: kalarmcal-lib = %{version}-%{release}
+Requires: kalarmcal-data = %{version}-%{release}
+Provides: kalarmcal-devel = %{version}-%{release}
 
 %description dev
 dev components for the kalarmcal package.
@@ -52,8 +51,8 @@ dev components for the kalarmcal package.
 %package lib
 Summary: lib components for the kalarmcal package.
 Group: Libraries
-Requires: kalarmcal-data
-Requires: kalarmcal-license
+Requires: kalarmcal-data = %{version}-%{release}
+Requires: kalarmcal-license = %{version}-%{release}
 
 %description lib
 lib components for the kalarmcal package.
@@ -76,25 +75,25 @@ locales components for the kalarmcal package.
 
 
 %prep
-%setup -q -n kalarmcal-18.08.0
+%setup -q -n kalarmcal-18.12.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535425829
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1549903688
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535425829
+export SOURCE_DATE_EPOCH=1549903688
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/kalarmcal
-cp COPYING.LIB %{buildroot}/usr/share/doc/kalarmcal/COPYING.LIB
+mkdir -p %{buildroot}/usr/share/package-licenses/kalarmcal
+cp COPYING.LIB %{buildroot}/usr/share/package-licenses/kalarmcal/COPYING.LIB
 pushd clr-build
 %make_install
 popd
@@ -145,12 +144,12 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AlarmCalendar.so.5
-/usr/lib64/libKF5AlarmCalendar.so.5.9.0
+/usr/lib64/libKF5AlarmCalendar.so.5.10.2
 /usr/lib64/qt5/plugins/akonadi_serializer_kalarm.so
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/kalarmcal/COPYING.LIB
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/kalarmcal/COPYING.LIB
 
 %files locales -f libkalarmcal5-serializer.lang -f libkalarmcal5.lang
 %defattr(-,root,root,-)
