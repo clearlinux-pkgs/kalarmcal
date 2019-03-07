@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kalarmcal
-Version  : 18.12.2
-Release  : 3
-URL      : https://download.kde.org/stable/applications/18.12.2/src/kalarmcal-18.12.2.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.12.2/src/kalarmcal-18.12.2.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.12.2/src/kalarmcal-18.12.2.tar.xz.sig
+Version  : 18.12.3
+Release  : 4
+URL      : https://download.kde.org/stable/applications/18.12.3/src/kalarmcal-18.12.3.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.3/src/kalarmcal-18.12.3.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.3/src/kalarmcal-18.12.3.tar.xz.sig
 Summary  : The KAlarm client library
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -43,6 +43,7 @@ Group: Development
 Requires: kalarmcal-lib = %{version}-%{release}
 Requires: kalarmcal-data = %{version}-%{release}
 Provides: kalarmcal-devel = %{version}-%{release}
+Requires: kalarmcal = %{version}-%{release}
 
 %description dev
 dev components for the kalarmcal package.
@@ -75,22 +76,23 @@ locales components for the kalarmcal package.
 
 
 %prep
-%setup -q -n kalarmcal-18.12.2
+%setup -q -n kalarmcal-18.12.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1549903688
+export SOURCE_DATE_EPOCH=1551984279
 mkdir -p clr-build
 pushd clr-build
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1549903688
+export SOURCE_DATE_EPOCH=1551984279
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarmcal
 cp COPYING.LIB %{buildroot}/usr/share/package-licenses/kalarmcal/COPYING.LIB
@@ -144,7 +146,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AlarmCalendar.so.5
-/usr/lib64/libKF5AlarmCalendar.so.5.10.2
+/usr/lib64/libKF5AlarmCalendar.so.5.10.3
 /usr/lib64/qt5/plugins/akonadi_serializer_kalarm.so
 
 %files license
