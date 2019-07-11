@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kalarmcal
-Version  : 19.04.2
-Release  : 9
-URL      : https://download.kde.org/stable/applications/19.04.2/src/kalarmcal-19.04.2.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.04.2/src/kalarmcal-19.04.2.tar.xz
-Source99 : https://download.kde.org/stable/applications/19.04.2/src/kalarmcal-19.04.2.tar.xz.sig
+Version  : 19.04.3
+Release  : 10
+URL      : https://download.kde.org/stable/applications/19.04.3/src/kalarmcal-19.04.3.tar.xz
+Source0  : https://download.kde.org/stable/applications/19.04.3/src/kalarmcal-19.04.3.tar.xz
+Source99 : https://download.kde.org/stable/applications/19.04.3/src/kalarmcal-19.04.3.tar.xz.sig
 Summary  : The KAlarm client library
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -77,16 +77,17 @@ locales components for the kalarmcal package.
 
 
 %prep
-%setup -q -n kalarmcal-19.04.2
+%setup -q -n kalarmcal-19.04.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1559882643
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1562856244
 mkdir -p clr-build
 pushd clr-build
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -95,11 +96,11 @@ export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
-make  %{?_smp_mflags}
+make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1559882643
+export SOURCE_DATE_EPOCH=1562856244
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarmcal
 cp COPYING.LIB %{buildroot}/usr/share/package-licenses/kalarmcal/COPYING.LIB
@@ -153,7 +154,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AlarmCalendar.so.5
-/usr/lib64/libKF5AlarmCalendar.so.5.11.2
+/usr/lib64/libKF5AlarmCalendar.so.5.11.3
 /usr/lib64/qt5/plugins/akonadi_serializer_kalarm.so
 
 %files license
