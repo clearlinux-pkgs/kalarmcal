@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kalarmcal
-Version  : 19.08.3
-Release  : 15
-URL      : https://download.kde.org/stable/applications/19.08.3/src/kalarmcal-19.08.3.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.08.3/src/kalarmcal-19.08.3.tar.xz
-Source1 : https://download.kde.org/stable/applications/19.08.3/src/kalarmcal-19.08.3.tar.xz.sig
+Version  : 19.12.0
+Release  : 16
+URL      : https://download.kde.org/stable/release-service/19.12.0/src/kalarmcal-19.12.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/19.12.0/src/kalarmcal-19.12.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/19.12.0/src/kalarmcal-19.12.0.tar.xz.sig
 Summary  : The KAlarm client library
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -78,14 +78,15 @@ locales components for the kalarmcal package.
 
 
 %prep
-%setup -q -n kalarmcal-19.08.3
+%setup -q -n kalarmcal-19.12.0
+cd %{_builddir}/kalarmcal-19.12.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1573530222
+export SOURCE_DATE_EPOCH=1576597209
 mkdir -p clr-build
 pushd clr-build
 # -Werror is for werrorists
@@ -102,10 +103,10 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1573530222
+export SOURCE_DATE_EPOCH=1576597209
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarmcal
-cp %{_builddir}/kalarmcal-19.08.3/COPYING.LIB %{buildroot}/usr/share/package-licenses/kalarmcal/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/kalarmcal-19.12.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kalarmcal/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
@@ -123,15 +124,18 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
+/usr/include/KF5/KAlarmCal/KAlarmCal/Akonadi
 /usr/include/KF5/KAlarmCal/KAlarmCal/AlarmText
 /usr/include/KF5/KAlarmCal/KAlarmCal/CollectionAttribute
 /usr/include/KF5/KAlarmCal/KAlarmCal/CompatibilityAttribute
 /usr/include/KF5/KAlarmCal/KAlarmCal/DateTime
 /usr/include/KF5/KAlarmCal/KAlarmCal/EventAttribute
+/usr/include/KF5/KAlarmCal/KAlarmCal/KACalendar
 /usr/include/KF5/KAlarmCal/KAlarmCal/KADateTime
 /usr/include/KF5/KAlarmCal/KAlarmCal/KAEvent
 /usr/include/KF5/KAlarmCal/KAlarmCal/KARecurrence
 /usr/include/KF5/KAlarmCal/KAlarmCal/Repetition
+/usr/include/KF5/KAlarmCal/kalarmcal/akonadi.h
 /usr/include/KF5/KAlarmCal/kalarmcal/alarmtext.h
 /usr/include/KF5/KAlarmCal/kalarmcal/collectionattribute.h
 /usr/include/KF5/KAlarmCal/kalarmcal/compatibilityattribute.h
@@ -156,7 +160,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AlarmCalendar.so.5
-/usr/lib64/libKF5AlarmCalendar.so.5.12.3
+/usr/lib64/libKF5AlarmCalendar.so.5.13.0
 /usr/lib64/qt5/plugins/akonadi_serializer_kalarm.so
 
 %files license
