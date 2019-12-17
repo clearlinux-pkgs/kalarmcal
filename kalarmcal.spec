@@ -6,7 +6,7 @@
 #
 Name     : kalarmcal
 Version  : 19.12.0
-Release  : 16
+Release  : 17
 URL      : https://download.kde.org/stable/release-service/19.12.0/src/kalarmcal-19.12.0.tar.xz
 Source0  : https://download.kde.org/stable/release-service/19.12.0/src/kalarmcal-19.12.0.tar.xz
 Source1  : https://download.kde.org/stable/release-service/19.12.0/src/kalarmcal-19.12.0.tar.xz.sig
@@ -21,7 +21,7 @@ BuildRequires : akonadi-dev
 BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
-BuildRequires : kcalcore-dev
+BuildRequires : kcalendarcore-dev
 BuildRequires : kcalutils-dev
 BuildRequires : kholidays-dev
 BuildRequires : kidentitymanagement-dev
@@ -44,7 +44,6 @@ Group: Development
 Requires: kalarmcal-lib = %{version}-%{release}
 Requires: kalarmcal-data = %{version}-%{release}
 Provides: kalarmcal-devel = %{version}-%{release}
-Requires: kalarmcal = %{version}-%{release}
 Requires: kalarmcal = %{version}-%{release}
 
 %description dev
@@ -86,10 +85,9 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1576597209
+export SOURCE_DATE_EPOCH=1576621364
 mkdir -p clr-build
 pushd clr-build
-# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -103,7 +101,7 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1576597209
+export SOURCE_DATE_EPOCH=1576621364
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarmcal
 cp %{_builddir}/kalarmcal-19.12.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kalarmcal/9a1929f4700d2407c70b507b3b2aaf6226a9543c
