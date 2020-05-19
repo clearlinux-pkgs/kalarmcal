@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kalarmcal
-Version  : 20.04.0
-Release  : 22
-URL      : https://download.kde.org/stable/release-service/20.04.0/src/kalarmcal-20.04.0.tar.xz
-Source0  : https://download.kde.org/stable/release-service/20.04.0/src/kalarmcal-20.04.0.tar.xz
-Source1  : https://download.kde.org/stable/release-service/20.04.0/src/kalarmcal-20.04.0.tar.xz.sig
+Version  : 20.04.1
+Release  : 23
+URL      : https://download.kde.org/stable/release-service/20.04.1/src/kalarmcal-20.04.1.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.04.1/src/kalarmcal-20.04.1.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.04.1/src/kalarmcal-20.04.1.tar.xz.sig
 Summary  : The KAlarm client library
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -21,11 +21,15 @@ BuildRequires : akonadi-dev
 BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
+BuildRequires : extra-cmake-modules-data
 BuildRequires : kcalendarcore-dev
 BuildRequires : kcalutils-dev
+BuildRequires : kconfig-dev
 BuildRequires : kholidays-dev
+BuildRequires : ki18n-dev
 BuildRequires : kidentitymanagement-dev
 BuildRequires : kpimtextedit-dev
+BuildRequires : qtbase-dev
 
 %description
 See Mainpage.dox for more information.
@@ -77,15 +81,15 @@ locales components for the kalarmcal package.
 
 
 %prep
-%setup -q -n kalarmcal-20.04.0
-cd %{_builddir}/kalarmcal-20.04.0
+%setup -q -n kalarmcal-20.04.1
+cd %{_builddir}/kalarmcal-20.04.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1587696444
+export SOURCE_DATE_EPOCH=1589900507
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -101,10 +105,10 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1587696444
+export SOURCE_DATE_EPOCH=1589900507
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarmcal
-cp %{_builddir}/kalarmcal-20.04.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kalarmcal/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/kalarmcal-20.04.1/COPYING.LIB %{buildroot}/usr/share/package-licenses/kalarmcal/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
@@ -160,7 +164,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AlarmCalendar.so.5
-/usr/lib64/libKF5AlarmCalendar.so.5.14.0
+/usr/lib64/libKF5AlarmCalendar.so.5.14.1
 /usr/lib64/qt5/plugins/akonadi_serializer_kalarm.so
 
 %files license
