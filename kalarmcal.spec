@@ -5,14 +5,14 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kalarmcal
-Version  : 20.04.2
-Release  : 24
-URL      : https://download.kde.org/stable/release-service/20.04.2/src/kalarmcal-20.04.2.tar.xz
-Source0  : https://download.kde.org/stable/release-service/20.04.2/src/kalarmcal-20.04.2.tar.xz
-Source1  : https://download.kde.org/stable/release-service/20.04.2/src/kalarmcal-20.04.2.tar.xz.sig
+Version  : 20.08.0
+Release  : 25
+URL      : https://download.kde.org/stable/release-service/20.08.0/src/kalarmcal-20.08.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.08.0/src/kalarmcal-20.08.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.08.0/src/kalarmcal-20.08.0.tar.xz.sig
 Summary  : The KAlarm client library
 Group    : Development/Tools
-License  : LGPL-2.1
+License  : LGPL-2.0
 Requires: kalarmcal-data = %{version}-%{release}
 Requires: kalarmcal-lib = %{version}-%{release}
 Requires: kalarmcal-license = %{version}-%{release}
@@ -81,15 +81,15 @@ locales components for the kalarmcal package.
 
 
 %prep
-%setup -q -n kalarmcal-20.04.2
-cd %{_builddir}/kalarmcal-20.04.2
+%setup -q -n kalarmcal-20.08.0
+cd %{_builddir}/kalarmcal-20.08.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1591908002
+export SOURCE_DATE_EPOCH=1597773797
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -101,14 +101,14 @@ export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
-make  %{?_smp_mflags}  VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1591908002
+export SOURCE_DATE_EPOCH=1597773797
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kalarmcal
-cp %{_builddir}/kalarmcal-20.04.2/COPYING.LIB %{buildroot}/usr/share/package-licenses/kalarmcal/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/kalarmcal-20.08.0/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kalarmcal/20079e8f79713dce80ab09774505773c926afa2a
 pushd clr-build
 %make_install
 popd
@@ -164,12 +164,12 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AlarmCalendar.so.5
-/usr/lib64/libKF5AlarmCalendar.so.5.14.2
+/usr/lib64/libKF5AlarmCalendar.so.5.15.0
 /usr/lib64/qt5/plugins/akonadi_serializer_kalarm.so
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/kalarmcal/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+/usr/share/package-licenses/kalarmcal/20079e8f79713dce80ab09774505773c926afa2a
 
 %files locales -f libkalarmcal5-serializer.lang -f libkalarmcal5.lang
 %defattr(-,root,root,-)
